@@ -1,0 +1,39 @@
+PODS:
+  - Alamofire (4.8.1)
+  - AlamofireImage (3.5.0):
+    - Alamofire (~> 4.8)
+  - Hero (1.4.0)
+  - LoadingPlaceholderView (0.0.2)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - Windless (0.1.5)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlamofireImage
+  - Hero
+  - LoadingPlaceholderView
+  - MagicalRecord
+  - Windless
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
+    - Hero
+    - LoadingPlaceholderView
+    - MagicalRecord
+    - Windless
+
+SPEC CHECKSUMS:
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
+  LoadingPlaceholderView: e913f5ae2673612d405ce395acca7cedb1bfaa81
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  Windless: c6b7d63ac3a0c7e6b241e316650d4605abf71894
+
+PODFILE CHECKSUM: 21e00698be32b6572f768167cffbd5d51a34affa
+
+COCOAPODS: 1.5.2

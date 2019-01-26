@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		2014281521FD1CD5008F5F7F /* testMATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014281421FD1CD5008F5F7F /* testMATests.swift */; };
 		2014281C21FD1D5B008F5F7F /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF759B21FB8D5C00478050 /* Manager.swift */; };
-		20B8AFC121FCB15F0088C994 /* AchievementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8AFC021FCB15F0088C994 /* AchievementDetailViewController.swift */; };
-		20B8AFC321FCB19D0088C994 /* AchievementDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8AFC221FCB19D0088C994 /* AchievementDetailPresenter.swift */; };
 		20B8AFC521FCC8700088C994 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8AFC421FCC8700088C994 /* Achievement.swift */; };
 		20B8AFC821FCF12E0088C994 /* AchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8AFC721FCF12E0088C994 /* AchievementViewController.swift */; };
 		20B8AFCA21FCF1490088C994 /* AchievementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8AFC921FCF1490088C994 /* AchievementPresenter.swift */; };
@@ -46,8 +44,6 @@
 		2014281221FD1CD5008F5F7F /* testMATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testMATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2014281421FD1CD5008F5F7F /* testMATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMATests.swift; sourceTree = "<group>"; };
 		2014281621FD1CD5008F5F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20B8AFC021FCB15F0088C994 /* AchievementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementDetailViewController.swift; sourceTree = "<group>"; };
-		20B8AFC221FCB19D0088C994 /* AchievementDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementDetailPresenter.swift; sourceTree = "<group>"; };
 		20B8AFC421FCC8700088C994 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		20B8AFC721FCF12E0088C994 /* AchievementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewController.swift; sourceTree = "<group>"; };
 		20B8AFC921FCF1490088C994 /* AchievementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenter.swift; sourceTree = "<group>"; };
@@ -109,15 +105,6 @@
 			path = testMATests;
 			sourceTree = "<group>";
 		};
-		20B8AFC621FCF0280088C994 /* AchievementDetails */ = {
-			isa = PBXGroup;
-			children = (
-				20B8AFC021FCB15F0088C994 /* AchievementDetailViewController.swift */,
-				20B8AFC221FCB19D0088C994 /* AchievementDetailPresenter.swift */,
-			);
-			path = AchievementDetails;
-			sourceTree = "<group>";
-		};
 		20CF755E21FB8A5600478050 = {
 			isa = PBXGroup;
 			children = (
@@ -148,7 +135,6 @@
 				20CF759B21FB8D5C00478050 /* Manager.swift */,
 				20CF756C21FB8A5600478050 /* ViewController.swift */,
 				20CF757421FB8A5600478050 /* Assets.xcassets */,
-				20B8AFC621FCF0280088C994 /* AchievementDetails */,
 				20CF75A221FB8DC800478050 /* Achievements */,
 				20CF75A121FB8DBA00478050 /* Categories */,
 				20CF759F21FB8D9F00478050 /* Groups */,
@@ -432,9 +418,7 @@
 			files = (
 				20CF75AA21FB8E4900478050 /* GroupsPresenter.swift in Sources */,
 				20CF75A621FB8E0900478050 /* Group.swift in Sources */,
-				20B8AFC121FCB15F0088C994 /* AchievementDetailViewController.swift in Sources */,
 				20CF759E21FB8D7500478050 /* Constants.swift in Sources */,
-				20B8AFC321FCB19D0088C994 /* AchievementDetailPresenter.swift in Sources */,
 				20CF757321FB8A5600478050 /* testMA.xcdatamodeld in Sources */,
 				20B8AFCA21FCF1490088C994 /* AchievementPresenter.swift in Sources */,
 				20CF75A421FB8DFD00478050 /* GroupsViewController.swift in Sources */,

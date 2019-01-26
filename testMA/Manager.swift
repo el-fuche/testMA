@@ -30,7 +30,7 @@ class Manager: NSObject {
     }
     
     func getGroups(datas: @escaping ([Group]?,Error?) -> ()){
-//        var groups = [Group]()
+        //        var groups = [Group]()
         getGroupsIDs { (receivedGroupsIDs, error) in
             if error == nil{
                 if let joinedGroupsIDs = receivedGroupsIDs?.joined(separator: ","){
@@ -59,7 +59,7 @@ class Manager: NSObject {
     
     private func setGroups(datas:[[String:Any]])->[Group]?{
         var groups = [Group]()
-
+        
         for tempGroup in datas{
             if let groupName =  tempGroup["name"] as? String, let groupeID = tempGroup["id"] as? String, let groupDesc = tempGroup["description"] as? String, let groupsCategories = tempGroup["categories"] as? [Int]{
                 let group = Group(id: groupeID, name: groupName, description: groupDesc, categories: groupsCategories)
@@ -70,7 +70,7 @@ class Manager: NSObject {
     }
     
     func getCategoriesFromID(ids:[Int],datas: @escaping ([Category]?,Error?) -> ()){
-//        var cats = [Category]()
+        //        var cats = [Category]()
         let flatIDS = ids.flatMap { Optional(String($0)) }
         let joinedIDs = flatIDS.joined(separator: ",")
         let parameters = ["ids":joinedIDs]
@@ -80,7 +80,7 @@ class Manager: NSObject {
                 switch response.result{
                 case.success(let value):
                     if let tempCats = value as? [[String:Any]]{
-                     
+                        
                         datas(self.setCategories(datas: tempCats), nil)
                     }
                 case.failure(let error):
@@ -119,8 +119,6 @@ class Manager: NSObject {
                     print(error)
                     data(nil,error)
                 }
-                
-                
         }
     }
     
@@ -133,32 +131,6 @@ class Manager: NSObject {
             }
         }
         return ach
-    }
-    
-    func getSingleAchievement(id:String,data:@escaping (Achievement?,Error?) -> ()){
-        Alamofire.request("\(Constants.baseURL)/achievements/\(id)", method: .get)
-            .validate(statusCode: 200..<300)
-            .responseJSON { response in
-                switch response.result{
-                case.success(let value):
-                    print(value)
-                    guard let receivedData = value as? [String:Any] else{
-                        print("Nope")
-                        break
-                    }
-                    if let achievementName = receivedData["name"] as? String, let achievementRequirement = receivedData["requirement"] as? String, let achievementDescription = receivedData["description"] as? String{
-                        let achievement = Achievement(name: achievementName, description: achievementDescription, requirement: achievementRequirement)
-                        data(achievement, nil)
-                    }
-                case.failure(let error):
-                    data(nil,error)
-                    print(error)
-                    
-                }
-                
-                
-        }
-        
     }
     
 }

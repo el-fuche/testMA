@@ -13,6 +13,9 @@ import AlamofireImage
 class Manager: NSObject {
     static let instance = Manager()
     
+    /// Get all groups IDs
+    ///
+    /// - Parameter datas: return of the request
     private func getGroupsIDs(datas: @escaping ([String]?,Error?) -> ()){
         Alamofire.request("\(Constants.baseURL)/achievements/groups", method: .get)
             .validate(statusCode: 200..<300)
@@ -23,14 +26,11 @@ class Manager: NSObject {
                 case.failure(let error):
                     datas(nil,error)
                 }
-                
         }
-        
-        
     }
     
     func getGroups(datas: @escaping ([Group]?,Error?) -> ()){
-        var groups = [Group]()
+//        var groups = [Group]()
         getGroupsIDs { (receivedGroupsIDs, error) in
             if error == nil{
                 if let joinedGroupsIDs = receivedGroupsIDs?.joined(separator: ","){
@@ -42,23 +42,12 @@ class Manager: NSObject {
                         .responseJSON { response in 
                             switch response.result{
                             case.success(let value):
-                                let receivedGroups = value as! [[String:Any]]
-                                for tempGroup in receivedGroups{
-                                    if let groupName =  tempGroup["name"] as? String, let groupeID = tempGroup["id"] as? String, let groupDesc = tempGroup["description"] as? String, let groupsCategories = tempGroup["categories"] as? [Int]{
-                                        let group = Group(id: groupeID, name: groupName, description: groupDesc, categories: groupsCategories)
-                                        groups.append(group)
-                                        print(group)
-                                        datas(groups, nil)
-                                    }
-                                }
+                                let receivedGroups = self.setGroups(datas:  value as! [[String:Any]])
+                                datas(receivedGroups, nil)
                             case.failure(let error):
                                 print(error)
                                 datas(nil, error)
-                                
-                                
                             }
-                            
-                            
                     }
                 }
             }
@@ -68,8 +57,20 @@ class Manager: NSObject {
         }
     }
     
+    private func setGroups(datas:[[String:Any]])->[Group]?{
+        var groups = [Group]()
+
+        for tempGroup in datas{
+            if let groupName =  tempGroup["name"] as? String, let groupeID = tempGroup["id"] as? String, let groupDesc = tempGroup["description"] as? String, let groupsCategories = tempGroup["categories"] as? [Int]{
+                let group = Group(id: groupeID, name: groupName, description: groupDesc, categories: groupsCategories)
+                groups.append(group)
+            }
+        }
+        return groups
+    }
+    
     func getCategoriesFromID(ids:[Int],datas: @escaping ([Category]?,Error?) -> ()){
-        var cats = [Category]()
+//        var cats = [Category]()
         let flatIDS = ids.flatMap { Optional(String($0)) }
         let joinedIDs = flatIDS.joined(separator: ",")
         let parameters = ["ids":joinedIDs]
@@ -79,24 +80,26 @@ class Manager: NSObject {
                 switch response.result{
                 case.success(let value):
                     if let tempCats = value as? [[String:Any]]{
-                        for arr in tempCats{
-                            
-                            if let catID = arr["id"] as? Int,let catName = arr["name"] as? String,let imgURL = arr["icon"] as? String, let tempsAchievement = arr["achievements"] as? [Int],let tempDesc = arr["description"] as? String{
-                                let category = Category(id: String(catID), name: catName, icon: imgURL, description: tempDesc, achievements: tempsAchievement)
-                                cats.append(category)
-                            }
-                        }
-                        datas(cats, nil)
-                        
+                     
+                        datas(self.setCategories(datas: tempCats), nil)
                     }
-                //                    print("VALUEEEES \(value)")
                 case.failure(let error):
                     print(error)
-                    
                 }
         }
     }
-
+    
+    func setCategories(datas:[[String:Any]])->[Category]?{
+        var cats = [Category]()
+        for arr in datas{
+            if let catID = arr["id"] as? Int,let catName = arr["name"] as? String,let imgURL = arr["icon"] as? String, let tempsAchievement = arr["achievements"] as? [Int],let tempDesc = arr["description"] as? String{
+                let category = Category(id: String(catID), name: catName, icon: imgURL, description: tempDesc, achievements: tempsAchievement)
+                cats.append(category)
+            }
+        }
+        return cats
+    }
+    
     func getAchievementsFromCategories(ids:[Int],data:@escaping ([Achievement]?,Error?) -> ()){
         let flatIDS = ids.flatMap { Optional(String($0)) }
         let joinedIDs = flatIDS.joined(separator: ",")
@@ -128,9 +131,7 @@ class Manager: NSObject {
                 let achievement = Achievement(name: achievementName, description: achievementDescription, requirement: achievementRequirement)
                 ach.append(achievement)
             }
-            
         }
-        
         return ach
     }
     
@@ -142,7 +143,7 @@ class Manager: NSObject {
                 case.success(let value):
                     print(value)
                     guard let receivedData = value as? [String:Any] else{
-                     print("Nope")
+                        print("Nope")
                         break
                     }
                     if let achievementName = receivedData["name"] as? String, let achievementRequirement = receivedData["requirement"] as? String, let achievementDescription = receivedData["description"] as? String{

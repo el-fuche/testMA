@@ -12,8 +12,10 @@ import AlamofireImage
 
 class Manager: NSObject {
     static let instance = Manager()
+    //MARK: - Groups methods
     
-    /// Get all groups IDs
+    
+    /// Get all existing groups IDs
     ///
     /// - Parameter datas: return of the request
     private func getGroupsIDs(datas: @escaping ([String]?,Error?) -> ()){
@@ -29,8 +31,10 @@ class Manager: NSObject {
         }
     }
     
+    /// To get all groups details
+    ///
+    /// - Parameter datas: return of the request
     func getGroups(datas: @escaping ([Group]?,Error?) -> ()){
-        //        var groups = [Group]()
         getGroupsIDs { (receivedGroupsIDs, error) in
             if error == nil{
                 if let joinedGroupsIDs = receivedGroupsIDs?.joined(separator: ","){
@@ -57,6 +61,10 @@ class Manager: NSObject {
         }
     }
     
+    /// To format the request array in Group array
+    ///
+    /// - Parameter datas: Datas from original request
+    /// - Returns: result in "Group" object array
     private func setGroups(datas:[[String:Any]])->[Group]?{
         var groups = [Group]()
         
@@ -69,8 +77,14 @@ class Manager: NSObject {
         return groups
     }
     
+    //MARK: - Categories methods
+
+    /// Get suuces categories from ID
+    ///
+    /// - Parameters:
+    ///   - ids: ids of the achiements categories
+    ///   - datas: Return of the request, formatted in "Category" objects
     func getCategoriesFromID(ids:[Int],datas: @escaping ([Category]?,Error?) -> ()){
-        //        var cats = [Category]()
         let flatIDS = ids.flatMap { Optional(String($0)) }
         let joinedIDs = flatIDS.joined(separator: ",")
         let parameters = ["ids":joinedIDs]
@@ -89,7 +103,11 @@ class Manager: NSObject {
         }
     }
     
-    func setCategories(datas:[[String:Any]])->[Category]?{
+   /// To set categories
+   ///
+   /// - Parameter datas: the datas to format
+   /// - Returns: formatted data, returns "Category" array
+   private func setCategories(datas:[[String:Any]])->[Category]?{
         var cats = [Category]()
         for arr in datas{
             if let catID = arr["id"] as? Int,let catName = arr["name"] as? String,let imgURL = arr["icon"] as? String, let tempsAchievement = arr["achievements"] as? [Int],let tempDesc = arr["description"] as? String{
@@ -100,6 +118,13 @@ class Manager: NSObject {
         return cats
     }
     
+    //MARK: - Achievements methods
+
+    /// Get achievement from ids
+    ///
+    /// - Parameters:
+    ///   - ids: ids to search
+    ///   - data: return, formatted in "Achievement" objects
     func getAchievementsFromCategories(ids:[Int],data:@escaping ([Achievement]?,Error?) -> ()){
         let flatIDS = ids.flatMap { Optional(String($0)) }
         let joinedIDs = flatIDS.joined(separator: ",")
@@ -122,7 +147,11 @@ class Manager: NSObject {
         }
     }
     
-    func setAchievementCategories(array:[[String:Any]])->[Achievement]{
+    /// To format request datas in "Achievement" objects
+    ///
+    /// - Parameter array: raw array from request
+    /// - Returns: datss formatted in "Achievement" objects
+    private func setAchievementCategories(array:[[String:Any]])->[Achievement]{
         var ach = [Achievement]()
         for element in array{
             if let achievementName = element["name"] as? String, let achievementRequirement = element["requirement"] as? String, let achievementDescription = element["description"] as? String{

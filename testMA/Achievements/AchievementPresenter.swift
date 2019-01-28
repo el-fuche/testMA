@@ -37,7 +37,7 @@ class AchievementPresenter{
         let alert = UIAlertController(title: successName, message: "Description : \(succesDecription)\n\nRequirements: \(succesRequirement)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
-            let text = "This is the text....."
+            let text = "I want to share the succes \(successName) with you all"
             let textShare = [ text ]
             let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.controller?.view
@@ -63,9 +63,9 @@ class AchievementPresenter{
         
     }
     
+    //MARK: - HUD methods
     func showHUD(){
         ProgressHUD.show("Loading...")
-        
     }
     
     func hideHUD(){

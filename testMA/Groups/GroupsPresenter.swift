@@ -14,6 +14,9 @@ class GroupsPresenter{
     var groups = [Group]()
     var controller : GroupsViewController?
     
+    /// To bind the controller & the presenter
+    ///
+    /// - Parameter controllerToAttach: The controller to
     func attachController(controllerToAttach:GroupsViewController){
         self.controller = controllerToAttach
     }
@@ -22,6 +25,9 @@ class GroupsPresenter{
         return "Groups"
     }
     
+    /// Methods to get groups
+    ///
+    /// - Parameter groupsArray: 
     func getGroups(groupsArray:@escaping ([Group]?,Error?) -> ()){
         Manager.instance.getGroups { (groups, error) in
             if error == nil{
@@ -35,6 +41,10 @@ class GroupsPresenter{
         }
     }
         
+    /// Go to the next controller
+    ///
+    /// - Parameters:
+    ///   - ids: Categories to swow in the next controller
     func goToCategoriesFromGroups(ids:[Int],id:String){
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             if let nextViewController = storyBoard.instantiateViewController(withIdentifier: "categoriesVC") as? CategoryViewController{
@@ -43,10 +53,10 @@ class GroupsPresenter{
                 controller?.navigationController?.pushViewController(nextViewController, animated: true)
             }
         }
-
+    
+    //MARK: - HUD methods
     func showHUD(){
-        ProgressHUD.show("Chargement en cours...")
-        
+        ProgressHUD.show("Loading...")
     }
     
     func hideHUD(){

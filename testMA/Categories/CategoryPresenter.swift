@@ -21,8 +21,12 @@ class CategoryPresenter {
         return "Categories"
     }
     
-    func getCatFromIDs(ids:[Int],id:String,datas:@escaping ([Category]?,Error?) -> ()){
-
+    /// Get categories
+    ///
+    /// - Parameters:
+    ///   - ids: categories ids
+    ///   - datas: Categories array
+    func getCatFromIDs(ids:[Int],datas:@escaping ([Category]?,Error?) -> ()){
         Manager.instance.getCategoriesFromID(ids: ids) { (cats, error) in
             if error == nil{
                 datas(cats,nil)
@@ -33,6 +37,9 @@ class CategoryPresenter {
         }
     }
     
+    /// Go to achievements
+    ///
+    /// - Parameter ids: achievements ids
     func goToAchievements(ids:[Int]){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         if let nextViewController = storyBoard.instantiateViewController(withIdentifier: "achievementVC") as? AchievementViewController{
@@ -42,9 +49,9 @@ class CategoryPresenter {
         }
     }
     
+    //MARK: - HUD methods
     func showHUD(){
         ProgressHUD.show("Loading...")
-        
     }
     
     func hideHUD(){

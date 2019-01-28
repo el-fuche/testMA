@@ -26,7 +26,7 @@ class CategoryViewController: UIViewController,UITableViewDelegate,UITableViewDa
         presenter.showHUD()
         presenter.attachController(controllerToAttach:self)
         if let tempCategory = caregoriesID{
-            presenter.getCatFromIDs(ids: tempCategory, id: "", datas: { (receivedCategories, error) in
+            presenter.getCatFromIDs(ids: tempCategory, datas: { (receivedCategories, error) in
                 if error == nil{
                     self.categories = receivedCategories!
                     self.tableView.reloadData()
@@ -45,6 +45,29 @@ class CategoryViewController: UIViewController,UITableViewDelegate,UITableViewDa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+    
+    func setUI(){
+        self.hero.isEnabled = true
+        self.view.addSubview(tableView)
+        self.title = presenter.getTitle()
+    }
+    
+    func setTableView(){
+        tableView.frame = self.view.frame
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
+    
+    //MARK: - Table View delegates
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.goToAchievements(ids: categories[indexPath.row].achievements)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
@@ -60,43 +83,7 @@ class CategoryViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let filter = AspectScaledToFillSizeFilter(size: CGSize(width: 64, height: 64))
         cell.imageView?.af_setImage(withURL: URL(string:categories[indexPath.row].icon)!,placeholderImage: UIImage(named: "Placeholder"),filter:filter)
         cell.imageView?.hero.id = categories[indexPath.row].name
-//        cell.imageView?.hero.
         return cell
     }
-    
-    func setUI(){
-        self.hero.isEnabled = true
-        self.view.addSubview(tableView)
-        self.title = presenter.getTitle()
-    }
-    
-    func setTableView(){
-        tableView.frame = self.view.frame
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.goToAchievements(ids: categories[indexPath.row].achievements)
-//        cellImg?.hero.id = categories[indexPath.row].id
-//        presenter.presentDetailView(img: (cellImg?.image)!, name: categories[indexPath.row].name, desc: categories[indexPath.row].name, id: categories[indexPath.row].id)
-    }
-    
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+  
 }

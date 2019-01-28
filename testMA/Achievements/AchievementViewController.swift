@@ -28,10 +28,8 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
             }
             else{
                 self.presenter.errorHUD()
-                print(error.debugDescription)
             }
         }
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,6 +39,8 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func setUI(){
         self.view.addSubview(tableView)
+        self.title = presenter.getTitle()
+
         
     }
     
@@ -51,6 +51,7 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
+    //MARK: - TableView delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return achievements.count
     }
@@ -65,14 +66,6 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.alertWithSucces(successName: achievements[indexPath.row].name, succesDecription: achievements[indexPath.row].description, succesRequirement: achievements[indexPath.row].requirement)
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+   
     
 }

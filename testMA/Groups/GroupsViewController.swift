@@ -11,7 +11,6 @@ import UIKit
 class GroupsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
-    //    let tableView = UITableView()
     let presenter = GroupsPresenter()
     var groups = [Group]()
     override func viewDidLoad() {
@@ -30,8 +29,6 @@ class GroupsViewController: UIViewController,UITableViewDelegate,UITableViewData
             }
         }
         
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,6 +48,7 @@ class GroupsViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     }
     
+    //MARK: - TableView methods delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groups.count
     }

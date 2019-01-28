@@ -8,7 +8,7 @@ target 'testMA' do
   # Pods for testMA
     pod 'Alamofire'
     pod 'AlamofireImage'
-    pod 'MagicalRecord'  
+    pod 'MagicalRecord'	, :inhibit_warnings => true  
     pod 'Hero'
     pod 'LoadingPlaceholderView'
     pod 'Windless'

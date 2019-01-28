@@ -84,13 +84,15 @@ class Manager: NSObject {
         return groups
     }
     
+    /// To save groups offline
+    ///
+    /// - Parameter groupsToSave: Groups to save
     func saveGroupsLocally(groupsToSave:[Group]){
         for group in groupsToSave{
             let groupToSave = GroupEntity.mr_createEntity()
             groupToSave?.idAttribute = group.id
             groupToSave?.nameAttribute = group.name
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
-            
         }
     }
     
@@ -135,6 +137,9 @@ class Manager: NSObject {
         return cats
     }
     
+    /// To save categories offline
+    ///
+    /// - Parameter catToSave: Categories to save
     func saveCategories(catToSave:[Category]){
         
         let group = GroupEntity.mr_findAll()?.last as! GroupEntity
@@ -196,6 +201,9 @@ class Manager: NSObject {
         return ach
     }
     
+    /// To save Achievement offline
+    ///
+    /// - Parameter achievementToSave: Achievement to save
     func saveAchievementLocally(achievementToSave:[Achievement]){
         
         let cat = CategoryEntity.mr_findAll()?.last as! CategoryEntity

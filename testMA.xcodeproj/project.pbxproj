@@ -65,6 +65,7 @@
 		20CF75AB21FBA12400478050 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		20CF75AD21FBA13B00478050 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		20CF75AF21FBA14C00478050 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		20EF29B021FEE13C0050D3AE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		26E1E45F9DEEE8EAB84644B4 /* Pods_testMA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testMA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E5D0385038D11381325D20 /* Pods-testMA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testMA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testMA/Pods-testMA.debug.xcconfig"; sourceTree = "<group>"; };
 		61D5FD9E43E68BBA4B89064D /* Pods-testMATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testMATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-testMATests/Pods-testMATests.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 			children = (
 				20CF757921FB8A5600478050 /* Info.plist */,
 				20CF756A21FB8A5600478050 /* AppDelegate.swift */,
+				20EF29B021FEE13C0050D3AE /* Bridging-Header.h */,
 				20CF759D21FB8D7500478050 /* Constants.swift */,
 				20CF759B21FB8D5C00478050 /* Manager.swift */,
 				20CF756C21FB8A5600478050 /* ViewController.swift */,
@@ -616,6 +618,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = marvinadademey.testMA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "testMA/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -633,6 +636,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = marvinadademey.testMA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "testMA/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

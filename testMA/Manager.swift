@@ -61,6 +61,8 @@ class Manager: NSObject {
         }
     }
     
+    
+    
     /// To format the request array in Group array
     ///
     /// - Parameter datas: Datas from original request
@@ -74,7 +76,18 @@ class Manager: NSObject {
                 groups.append(group)
             }
         }
+        saveGroupsLocally(groupsToSave: groups)
         return groups
+    }
+    
+    func saveGroupsLocally(groupsToSave:[Group]){
+        for group in groupsToSave{
+            let groupToSave = GroupEntity.mr_createEntity()
+            groupToSave?.idAttribute = group.id
+            groupToSave?.nameAttribute = group.name
+            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+
+        }
     }
     
     //MARK: - Categories methods
@@ -115,7 +128,23 @@ class Manager: NSObject {
                 cats.append(category)
             }
         }
+    saveCategories(catToSave: cats)
         return cats
+    }
+    
+    func saveCategories(catToSave:[Category]){
+        
+        let group = GroupEntity.mr_findAll()?.last as! GroupEntity
+        for cat in catToSave{
+            let category = CategoryEntity.mr_createEntity()
+            
+//            group.add
+            group.addToCategories(category!)
+//            category.add
+        }
+        print(group)
+//        let cat = CategoryEntity.mr_find(byAttribute: "<#T##String#>", withValue: <#T##Any#>)
+        
     }
     
     //MARK: - Achievements methods

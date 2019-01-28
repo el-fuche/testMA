@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AchievementEntity" representedClassName="AchievementEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="requirementAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="achievements" inverseEntity="CategoryEntity" syncable="YES"/>
+    </entity>
+    <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iconAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="achievements" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AchievementEntity" inverseName="category" inverseEntity="AchievementEntity" syncable="YES"/>
+        <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="GroupEntity" inverseName="categories" inverseEntity="GroupEntity" syncable="YES"/>
+    </entity>
+    <entity name="GroupEntity" representedClassName="GroupEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categories" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CategoryEntity" inverseName="group" inverseEntity="CategoryEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GroupEntity" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="AchievementEntity" positionX="45" positionY="-207" width="128" height="103"/>
+        <element name="CategoryEntity" positionX="295" positionY="-99" width="128" height="133"/>
+    </elements>
 </model>

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        MagicalRecord.setupCoreDataStack(withStoreNamed: "GroupEntity")
+        MagicalRecord.setupCoreDataStack(withStoreNamed: "CategoryEntity")
+        MagicalRecord.setupCoreDataStack(withStoreNamed: "AchievementEntity")
+
         return true
     }
 

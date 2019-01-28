@@ -16,6 +16,7 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
     var achievements = [Achievement]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.attachController(controllerToAttach: self)
         setTableView()
         setUI()
         presenter.getAchievementCategories(ids: ids!) { (tempAchievements, error) in
@@ -59,22 +60,7 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = presenter.alertWithSucces(successName: achievements[indexPath.row].name, succesDecription: achievements[indexPath.row].description, succesRequirement: achievements[indexPath.row].requirement)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
-            let text = "This is the text....."
-            let textShare = [ text ]
-            let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        //        let alert = UIAlertController(title: "successName", message: "test", preferredStyle: .alert)
-        //        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        //        alert.addAction(UIAlertAction(title: "Share", style: .default, handler: nil))
-        //        self.present(alert, animated: true, completion: nil)
+        presenter.alertWithSucces(successName: achievements[indexPath.row].name, succesDecription: achievements[indexPath.row].description, succesRequirement: achievements[indexPath.row].requirement)
     }
     /*
      // MARK: - Navigation

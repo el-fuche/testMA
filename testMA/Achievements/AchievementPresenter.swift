@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 class AchievementPresenter{
     var controller : AchievementViewController?
@@ -23,7 +24,7 @@ class AchievementPresenter{
     ///
     /// - Returns: The title
     func getTitle()->String{
-        return "Categories"
+        return "Achievements"
     }
     
     /// An alert to show details of the achievement. I choose this wat to present the datas because in my opinion, it's not worthy to create a detailled view juste to show 2 sentences.
@@ -60,6 +61,19 @@ class AchievementPresenter{
             }
         }
         
+    }
+    
+    func showHUD(){
+        ProgressHUD.show("Loading...")
+        
+    }
+    
+    func hideHUD(){
+        ProgressHUD.dismiss()
+    }
+    
+    func errorHUD(){
+        ProgressHUD.showError()
     }
     
     

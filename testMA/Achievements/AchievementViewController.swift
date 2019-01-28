@@ -19,12 +19,15 @@ class AchievementViewController: UIViewController,UITableViewDelegate,UITableVie
         presenter.attachController(controllerToAttach: self)
         setTableView()
         setUI()
+        presenter.showHUD()
         presenter.getAchievementCategories(ids: ids!) { (tempAchievements, error) in
             if error == nil{
                 self.achievements = tempAchievements!
                 self.tableView.reloadData()
+                self.presenter.hideHUD()
             }
             else{
+                self.presenter.errorHUD()
                 print(error.debugDescription)
             }
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class CategoryPresenter {
     var groups = [Category]()
@@ -20,28 +21,37 @@ class CategoryPresenter {
         return "Categories"
     }
     
-    func getCatFromIDs(ids:[Int],id:String,datas:@escaping ([Category]?) -> ()){
-//        Manager.instance.getCategoryFromID(id: id) { (category, error) in
-//            print(category)
-//        }
+    func getCatFromIDs(ids:[Int],id:String,datas:@escaping ([Category]?,Error?) -> ()){
+
         Manager.instance.getCategoriesFromID(ids: ids) { (cats, error) in
             if error == nil{
-                datas(cats)
+                datas(cats,nil)
             }
             else{
-                print(error)
+                datas(nil,error)
             }
-//            print(cats!)
         }
     }
     
     func goToAchievements(ids:[Int]){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                if let nextViewController = storyBoard.instantiateViewController(withIdentifier: "achievementVC") as? AchievementViewController{
-        nextViewController.ids = ids
-                    controller?.navigationController?.pushViewController(nextViewController, animated: true)
-
+        if let nextViewController = storyBoard.instantiateViewController(withIdentifier: "achievementVC") as? AchievementViewController{
+            nextViewController.ids = ids
+            controller?.navigationController?.pushViewController(nextViewController, animated: true)
+            
+        }
     }
+    
+    func showHUD(){
+        ProgressHUD.show("Loading...")
+        
     }
-
+    
+    func hideHUD(){
+        ProgressHUD.dismiss()
+    }
+    
+    func errorHUD(){
+        ProgressHUD.showError()
+    }
 }

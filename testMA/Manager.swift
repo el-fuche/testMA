@@ -9,9 +9,13 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import ReachabilitySwift
 
 class Manager: NSObject {
     static let instance = Manager()
+    let reachability = Reachability()!
+    
+    
     //MARK: - Groups methods
     
     
@@ -86,12 +90,12 @@ class Manager: NSObject {
             groupToSave?.idAttribute = group.id
             groupToSave?.nameAttribute = group.name
             NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
-
+            
         }
     }
     
     //MARK: - Categories methods
-
+    
     /// Get suuces categories from ID
     ///
     /// - Parameters:
@@ -107,20 +111,19 @@ class Manager: NSObject {
                 switch response.result{
                 case.success(let value):
                     if let tempCats = value as? [[String:Any]]{
-                        
                         datas(self.setCategories(datas: tempCats), nil)
                     }
                 case.failure(let error):
-                    print(error)
+                    datas(nil, error)
                 }
         }
     }
     
-   /// To set categories
-   ///
-   /// - Parameter datas: the datas to format
-   /// - Returns: formatted data, returns "Category" array
-   private func setCategories(datas:[[String:Any]])->[Category]?{
+    /// To set categories
+    ///
+    /// - Parameter datas: the datas to format
+    /// - Returns: formatted data, returns "Category" array
+    private func setCategories(datas:[[String:Any]])->[Category]?{
         var cats = [Category]()
         for arr in datas{
             if let catID = arr["id"] as? Int,let catName = arr["name"] as? String,let imgURL = arr["icon"] as? String, let tempsAchievement = arr["achievements"] as? [Int],let tempDesc = arr["description"] as? String{
@@ -128,7 +131,7 @@ class Manager: NSObject {
                 cats.append(category)
             }
         }
-    saveCategories(catToSave: cats)
+        saveCategories(catToSave: cats)
         return cats
     }
     
@@ -137,18 +140,19 @@ class Manager: NSObject {
         let group = GroupEntity.mr_findAll()?.last as! GroupEntity
         for cat in catToSave{
             let category = CategoryEntity.mr_createEntity()
-            
-//            group.add
+            category?.nameAttribute = cat.name
+            category?.idAttribute = cat.id
+            category?.iconAttribute = cat.icon
             group.addToCategories(category!)
-//            category.add
+            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+            
         }
         print(group)
-//        let cat = CategoryEntity.mr_find(byAttribute: "<#T##String#>", withValue: <#T##Any#>)
         
     }
     
     //MARK: - Achievements methods
-
+    
     /// Get achievement from ids
     ///
     /// - Parameters:
@@ -188,7 +192,23 @@ class Manager: NSObject {
                 ach.append(achievement)
             }
         }
+        saveAchievementLocally(achievementToSave: ach)
         return ach
+    }
+    
+    func saveAchievementLocally(achievementToSave:[Achievement]){
+        
+        let cat = CategoryEntity.mr_findAll()?.last as! CategoryEntity
+        for ach in achievementToSave{
+            let achievement = AchievementEntity.mr_createEntity()
+            achievement?.nameAttribute = ach.name
+            achievement?.descriptionAttribute = ach.description
+            achievement?.requirementAttribute = ach.requirement
+            cat.addToAchievements(achievement!)
+            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+            
+        }
+        
     }
     
 }

@@ -7,6 +7,8 @@ PODS:
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
+  - ProgressHUD (2.60)
+  - ReachabilitySwift (3)
   - Windless (0.1.5)
 
 DEPENDENCIES:
@@ -15,6 +17,8 @@ DEPENDENCIES:
   - Hero
   - LoadingPlaceholderView
   - MagicalRecord
+  - ProgressHUD
+  - ReachabilitySwift
   - Windless
 
 SPEC REPOS:
@@ -24,6 +28,8 @@ SPEC REPOS:
     - Hero
     - LoadingPlaceholderView
     - MagicalRecord
+    - ProgressHUD
+    - ReachabilitySwift
     - Windless
 
 SPEC CHECKSUMS:
@@ -32,8 +38,10 @@ SPEC CHECKSUMS:
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   LoadingPlaceholderView: e913f5ae2673612d405ce395acca7cedb1bfaa81
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  ProgressHUD: 4e4efbaf4f5de8bd32e0c4c3b6644a90ea1a8c3e
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Windless: c6b7d63ac3a0c7e6b241e316650d4605abf71894
 
-PODFILE CHECKSUM: 21e00698be32b6572f768167cffbd5d51a34affa
+PODFILE CHECKSUM: d2ddfa4170791d7961df5551c3ecbad6d902608a
 
 COCOAPODS: 1.5.2

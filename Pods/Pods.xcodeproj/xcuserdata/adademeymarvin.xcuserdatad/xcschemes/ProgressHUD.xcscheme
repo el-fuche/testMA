@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2E4E95020D438EE802933A4719245DB6"
-               BlueprintName = "Windless"
+               BlueprintIdentifier = "485FC10135B5044939EFA2B4BD34895F"
+               BlueprintName = "ProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Windless.framework">
+               BuildableName = "ProgressHUD.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

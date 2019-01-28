@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 class GroupsPresenter{
     var groups = [Group]()
@@ -21,12 +22,15 @@ class GroupsPresenter{
         return "Groups"
     }
     
-    func getGroups(groupsArray:@escaping ([Group]?) -> ()){
+    func getGroups(groupsArray:@escaping ([Group]?,Error?) -> ()){
         Manager.instance.getGroups { (groups, error) in
             if error == nil{
                 self.groups = groups!
-                groupsArray(self.groups)
+                groupsArray(self.groups,nil)
                 
+            }
+            else{
+                groupsArray(nil,error)
             }
         }
     }
@@ -39,12 +43,19 @@ class GroupsPresenter{
                 controller?.navigationController?.pushViewController(nextViewController, animated: true)
             }
         }
-//        Manager.instance.getAllGroups { (groups, error) in
-//            print(groups!)
-//        }
-        
 
+    func showHUD(){
+        ProgressHUD.show("Chargement en cours...")
         
+    }
+    
+    func hideHUD(){
+        ProgressHUD.dismiss()
+    }
+    
+    func errorHUD(){
+        ProgressHUD.showError()
+    }
     
     
 }

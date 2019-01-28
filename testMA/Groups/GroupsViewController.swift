@@ -11,7 +11,7 @@ import UIKit
 class GroupsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
-//    let tableView = UITableView()
+    //    let tableView = UITableView()
     let presenter = GroupsPresenter()
     var groups = [Group]()
     override func viewDidLoad() {
@@ -19,14 +19,21 @@ class GroupsViewController: UIViewController,UITableViewDelegate,UITableViewData
         setTableView()
         setUI()
         presenter.attachController(controllerToAttach: self)
-        presenter.getGroups { (tempGroup) in
-            self.groups = tempGroup!
-            self.tableView.reloadData()
+        presenter.showHUD()
+        presenter.getGroups { (tempGroup, error) in
+            if error == nil {
+                self.groups = tempGroup!
+                self.tableView.reloadData()
+                self.presenter.hideHUD()
+            }else{
+                self.presenter.errorHUD()
+            }
         }
+        
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,15 +68,4 @@ class GroupsViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

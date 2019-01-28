@@ -9,6 +9,7 @@
 #ifndef Bridging_Header_h
 #define Bridging_Header_h
 #import <MagicalRecord/MagicalRecord.h>
+#import <ProgressHUD/ProgressHUD.h>
 
 
 #endif /* Bridging_Header_h */

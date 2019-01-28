@@ -23,12 +23,18 @@ class CategoryViewController: UIViewController,UITableViewDelegate,UITableViewDa
         super.viewDidLoad()
         setTableView()
         setUI()
+        presenter.showHUD()
         presenter.attachController(controllerToAttach:self)
         if let tempCategory = caregoriesID{
-            //        presenter.getCatFromIDs(ids: <#T##[Int]#>)
-            presenter.getCatFromIDs(ids: tempCategory, id: "", datas: { (receivedCategories) in
-                self.categories = receivedCategories!
-                self.tableView.reloadData()
+            presenter.getCatFromIDs(ids: tempCategory, id: "", datas: { (receivedCategories, error) in
+                if error == nil{
+                    self.categories = receivedCategories!
+                    self.tableView.reloadData()
+                    self.presenter.hideHUD()
+                }
+                else{
+                    self.presenter.errorHUD()
+                }
             })
         }
         // Do any additional setup after loading the view.

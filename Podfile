@@ -14,7 +14,8 @@ target 'testMA' do
     pod 'Windless'
     #pod 'Constraints'
     #pod 'TinyConstraints'
-
+    pod 'ReachabilitySwift'
+    pod 'ProgressHUD'
   target 'testMATests' do
     inherit! :search_paths
     # Pods for testing
